@@ -46,13 +46,11 @@ require_relative '../models/address_book'
    # Test that AddressBook's .import_from_csv() method is working as expected
    describe "#import_from_csv" do
      it "imports the correct number of entries" do
-      # #3
       book.import_from_csv("entries.csv")
       book_size = book.entries.size
 
-      # Check the size of the entries in AddressBook
       expect(book_size).to eq 5
-     end
+    end
 
      it "imports the 1st entry" do
       book.import_from_csv("entries.csv")
@@ -88,6 +86,35 @@ require_relative '../models/address_book'
       entry_five = book.entries[4]
       check_entry(entry_five, "Sussie", "555-555-2036", "sussie@blocmail.com")
      end
+
+     it "imports the correct number of entries from a second csv file" do
+       book.import_from_csv("entries_2.csv")
+       book_size = book.entries.size
+
+       expect(book_size).to eq 3
+     end
+
+     it "imports the 1st entry from the 2nd csv file" do
+      book.import_from_csv("entries_2.csv")
+      # Check the first entry
+      first_entry= book.entries[0]
+      check_entry(first_entry, "Angie", "111-555-4854", "Angie@blocmail.com")
+     end
+
+     it "imports the 2nd entry from the 2nd csv file" do
+      book.import_from_csv("entries_2.csv")
+      # Check the first entry
+      second_entry = book.entries[1]
+      check_entry(second_entry, "Beth", "222-555-5415", "Beth@blocmail.com")
+     end
+
+     it "imports the 3rd entry from the 2nd csv file" do
+      book.import_from_csv("entries_2.csv")
+      # Check the first entry
+      third_entry = book.entries[2]
+      check_entry(third_entry, "Clyde", "333-555-3660", "Clyde@blocmail.com")
+     end
+
    end
 
  end
