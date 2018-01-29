@@ -13,8 +13,9 @@ class MenuController
     puts "1 - View all entries"
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
-    puts "4 - Import entries from a CSV"
-    puts "5 - Exit"
+    puts "4 - Delete all entries"
+    puts "5 - Import entries from a CSV"
+    puts "6 - Exit"
     print "Enter your selection: "
 
     # #3
@@ -35,10 +36,12 @@ class MenuController
          search_entries
          main_menu
        when 4
+         detonate
+       when 5
          system "clear"
          read_csv
          main_menu
-       when 5
+       when 6
          puts "Good-bye!"
          # #8
          exit(0)
@@ -196,6 +199,27 @@ class MenuController
       puts "#{selection} is not a valid input"
       puts entry.to_s
       search_submenu(entry)
+    end
+  end
+
+  def detonate
+    system "clear"
+    print "Are you sure you want to delete all entries? y/n?:"
+    selection = gets.chomp
+
+    case selection
+    # #18
+      when "n"
+        main_menu
+      when "y"
+        address_book.entries.clear
+        system "clear"
+        puts "All entries in address book have been deleted"
+        main_menu
+      else
+        system "clear"
+        puts "#{selection} is not a valid input"
+        main_menu
     end
   end
 
